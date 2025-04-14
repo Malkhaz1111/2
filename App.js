@@ -95,9 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     textElement.textContent = signalTextsArray[randomIndex];
                 }
             });
-
-            // სიმულაცია TradingView API-სთან დაკავშირების
-            updateChartData();
             
             // პროცენტული პროგნოზის დამატება
             updateProbabilityPrediction();
@@ -135,28 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial active timeframe
     timeframeButtons[3].style.backgroundColor = '#0d47a1';
 
-    // Function to update chart data (would connect to TradingView API in real implementation)
-    function updateChartData() {
-        const selectedSymbol = symbolSelect.value;
-        const selectedMarket = marketSelect.value;
-        console.log(`Updating chart for ${selectedSymbol} in ${selectedMarket} market`);
-        
-        // აქ იქნებოდა TradingView API-ის გამოძახება რეალურ იმპლემენტაციაში
-        
-        // მაგალითად:
-        // const widget = new TradingView.widget({
-        //    container_id: 'chart-container',
-        //    symbol: selectedSymbol,
-        //    interval: 'D',
-        //    ...other parameters
-        // });
-    }
-
-    // TradingView API-ის დამატების ფუნქცია (რეალურ პროექტში)
-    function loadTradingViewWidget() {
-        // კოდი TradingView-ის Widget-ის დასამატებლად
-        // აქ შეგიძლიათ დაამატოთ ნამდვილი Trading View API კოდი
-    }
 
     // ინდიკატორების გამოთვლის ფუნქციები (რეალურ იმპლემენტაციაში უფრო რთული იქნებოდა)
     
@@ -557,56 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    // TradingView ჩარტის ჩასამატებელი ფუნქცია
-function loadTradingViewWidget(symbol = "EURUSD") {
-    const chartContainer = document.getElementById("chart-container");
-    if (!chartContainer) return;
-    chartContainer.innerHTML = "";
-
-    const existingScript = document.querySelector('script[src="https://s3.tradingview.com/tv.js"]');
-    if (existingScript) {
-        existingScript.remove();
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/tv.js";
-    script.onload = function () {
-        new TradingView.widget({
-            container_id: "chart-container",
-            width: "100%",
-            height: "100%",
-            symbol: symbol,
-            interval: "60",
-            timezone: "Etc/UTC",
-            theme: "dark",
-            style: "1",
-            locale: "ka",
-            toolbar_bg: "#131722",
-            enable_publishing: false,
-            hide_side_toolbar: false,
-            allow_symbol_change: true,
-            save_image: false
-        });
-    };
-
-    document.body.appendChild(script);
-}
-
-// განახლებული ჩარტის ფუნქცია
-function updateChartData() {
-    const selectedSymbol = symbolSelect.value;
-    const selectedMarket = marketSelect.value;
-
-    // TradingView-სთვის სიმბოლოს სახე შეიძლება განსხვავდებოდეს
-    let tvSymbol = selectedSymbol;
-
-    if (selectedMarket.toLowerCase() === 'forex' || selectedMarket.toLowerCase() === 'crypto') {
-        tvSymbol = selectedSymbol + 'USD'; // ან მოირგე საჭიროებისამებრ
-    }
-
-    loadTradingViewWidget(tvSymbol);
-}
-
+   
     // საიტის ინიციალიზაცია
     initializeSite();
     
